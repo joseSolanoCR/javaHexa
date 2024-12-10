@@ -19,8 +19,8 @@ public class ApplicationConfig {
         return new TaskService(
                 new CreateTaskUseCaseImpl(taskRepositoryPort),
                 new RetrieveTaskUseCaseImpl(taskRepositoryPort),
-                new DeleteTaskUseCaseImpl(taskRepositoryPort),
                 new UpdateTaskUseCaseImpl(taskRepositoryPort),
+                new DeleteTaskUseCaseImpl(taskRepositoryPort),
                 getAdditionalTaskInfoUseCase
                 );
         }

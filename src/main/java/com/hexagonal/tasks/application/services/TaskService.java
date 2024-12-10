@@ -18,11 +18,11 @@ public class TaskService implements CreateTaskUseCase , DeleteTaskUseCase ,
     private final  GetAdditionalTaskInfoUseCase getAdditionalTaskInfoUseCase;
 
 
-    public TaskService(CreateTaskUseCase createTaskUseCase, RetrieveTaskUseCase retrieveTaskUseCase, DeleteTaskUseCase deleteTaskUseCase, UpdateTaskUseCase updateTaskUseCase, GetAdditionalTaskInfoUseCase getAdditionalTaskInfoUseCase) {
+    public TaskService(CreateTaskUseCase createTaskUseCase, RetrieveTaskUseCase retrieveTaskUseCase,  UpdateTaskUseCase updateTaskUseCase,DeleteTaskUseCase deleteTaskUseCase, GetAdditionalTaskInfoUseCase getAdditionalTaskInfoUseCase) {
         this.createTaskUseCase = createTaskUseCase;
         this.retrieveTaskUseCase = retrieveTaskUseCase;
-        this.deleteTaskUseCase = deleteTaskUseCase;
         this.updateTaskUseCase = updateTaskUseCase;
+        this.deleteTaskUseCase = deleteTaskUseCase;
         this.getAdditionalTaskInfoUseCase = getAdditionalTaskInfoUseCase;
     }
 
@@ -36,10 +36,7 @@ public class TaskService implements CreateTaskUseCase , DeleteTaskUseCase ,
         return deleteTaskUseCase.deleteTask(Id);
     }
 
-    @Override
-    public AdditionalTaskInfo getAdditionalTaskInfo(Long Id) {
-        return getAdditionalTaskInfoUseCase.getAdditionalTaskInfo(Id);
-    }
+
 
     @Override
     public Optional<Task> getTask(Long Id) {
@@ -54,5 +51,9 @@ public class TaskService implements CreateTaskUseCase , DeleteTaskUseCase ,
     @Override
     public Optional<Task> updateTask(Long Id, Task updateTask) {
         return updateTaskUseCase.updateTask(Id, updateTask);
-    }}
+    }
 
+    @Override
+    public AdditionalTaskInfo getAdditionalTaskInfo(Long taskId) {
+    return getAdditionalTaskInfoUseCase.getAdditionalTaskInfo(taskId);
+    }}

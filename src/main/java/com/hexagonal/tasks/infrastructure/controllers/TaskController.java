@@ -16,8 +16,10 @@ public class TaskController {
     private final TaskService taskService;
 
     public TaskController(TaskService taskService) {
+
         this.taskService = taskService;
     }
+
     @PostMapping
     public ResponseEntity<Task> createTask(@RequestBody Task task){
         Task createdTask = taskService.createTask(task);
@@ -34,27 +36,27 @@ public class TaskController {
     @GetMapping
     public ResponseEntity<List<Task>> getAllTasks(){
         List<Task> tasks = taskService.getAllTasks();
-        return new ResponseEntity(tasks, HttpStatus.OK);
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
     @PutMapping("/{taskId}")
-    public ResponseEntity<Task> updateTask(@PathVariable Long taskId, @RequestBody Task updateTask){
-        return taskService.updateTask(taskId, updateTask)
+    public ResponseEntity<Task> updateTask(@PathVariable Long taskId, @RequestBody Task updatedTask){
+        return taskService.updateTask(taskId, updatedTask)
                 .map(task -> new ResponseEntity<>(task, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
     @DeleteMapping("/taskId")
-    public ResponseEntity<Void> deleteTaskById(@PathVariable Long taslId){
-        if(taskService.deleteTask(taslId)){
+    public ResponseEntity<Void> deleteTaskById(@PathVariable Long taskId){
+        if(taskService.deleteTask(taskId)){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @GetMapping("{taskId}/aditionalInfo")
+    @GetMapping("{taskId}/additional-info")
     public ResponseEntity<AdditionalTaskInfo> getAdditionalTaskInfo(@PathVariable Long taskId){
-        AdditionalTaskInfo additionalTaskInfo = new taskService.getAdditionalTaskInfo(taskId);
+        AdditionalTaskInfo additionalTaskInfo =  taskService.getAdditionalTaskInfo(taskId);
         return new ResponseEntity<>(additionalTaskInfo, HttpStatus.OK);
     }
 
